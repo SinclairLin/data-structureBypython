@@ -63,6 +63,8 @@ def turn_string(my_str: str):
 
 
 # print(turn_string('理塘丁真'))
+# print(turn_string('逆天邪神'))
+# print(turn_string('KFC CRAZY TUS, V ME 50'))
 
 
 # 通过栈判断左右括号是否匹配
@@ -93,3 +95,21 @@ def matches(left, right):
 # print(par_checker('([{)]}'))  # False
 # print(par_checker('{[()]}'))  # True
 # print(par_checker('({([()])}){}'))  # True
+
+
+# 通过栈实现进制转换
+def base_conversion(d_number: int, base: int):
+    digits = '0123456789ABCDEF'
+    s = Stack()
+    while d_number > 0:
+        s.push(d_number % base)  # 取余，然后入栈
+        d_number //= base  # 整除
+    string = ''
+    while not s.is_empty():
+        string += digits[s.pop()]
+    return string
+
+
+# print(base_conversion(666, 16))  # 29A
+# print(base_conversion(666, 5))  # 10131
+# print(base_conversion(666, 8))  # 1232
