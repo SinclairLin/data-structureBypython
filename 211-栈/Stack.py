@@ -33,22 +33,26 @@ class Stack:
         return len(self.item)
 
 
-s = Stack()
-print(s.is_empty())  # True
-s.push(9)
-print(s.is_empty())  # False
-s.push('1! 5!')
-print(s.size())  # 2
-print(s.peek())  # 1! 5!
-print(s.pop())  # 1! 5!
+# s = Stack()
+# print(s.is_empty())  # True
+# s.push(9)
+# print(s.is_empty())  # False
+# s.push('1! 5!')
+# print(s.size())  # 2
+# print(s.peek())  # 1! 5!
+# print(s.pop())  # 1! 5!
 
 
-def turn_string(my_str):
-    s2 = Stack()
+# 通过栈反转字符串
+def turn_string(my_str: str):
+    s = Stack()
     output_str = ''
     for i in my_str:
-        s2.push(i)
-    while not s2.is_empty():
-        output_str += s2.pop()
-        return output_str
+        s.push(i)
+    while not s.is_empty():
+        output_str += s.pop()
+    return output_str
+
+
+# print(turn_string('理塘丁真'))
 
