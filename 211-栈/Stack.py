@@ -12,13 +12,14 @@
 class Stack:
     # 初始化
     def __init__(self):
+        self.top = -1
         self.item = []
 
     # 若空，返回TRUE
     def is_empty(self):
         return self.item == []
 
-    def push(self, item):
+    def push(self, item: any):
         self.item.append(item)
 
     def pop(self):
@@ -32,12 +33,19 @@ class Stack:
     def size(self):
         return len(self.item)
 
+    # 将栈置空
+    def empty(self):
+        self.item = []
+        self.top = -1
+
 
 # s = Stack()
 # print(s.is_empty())  # True
 # s.push(9)
 # print(s.is_empty())  # False
 # s.push('1! 5!')
+# s.empty()
+# print(s.size())
 # print(s.size())  # 2
 # print(s.peek())  # 1! 5!
 # print(s.pop())  # 1! 5!
@@ -57,30 +65,31 @@ def turn_string(my_str: str):
 # print(turn_string('理塘丁真'))
 
 
-def par_checker(par):
-    s = Stack
+# 通过栈判断左右括号是否匹配
+def par_checker(par: str):
+    s = Stack()
     flag = True
     index = 0
     while flag and index < len(par):
         symbol = par[index]
         if symbol in '([{':
             s.push(symbol)
+        elif s.is_empty():
+            flag = False
         else:
-            if s.is_empty():
+            top = s.pop()
+            if not matches(top, symbol):
                 flag = False
-            else:
-                top = s.pop()
-                if not matches(top, symbol):
-                    flag = False
         index += 1
-
-    if flag and s.is_empty():
-        return True
-    else:
-        return False
+    return bool(flag and s.is_empty())
 
 
 def matches(left, right):
-    l = '([{'
-    r = ')]}'
-    return l.index(left) == r.index(right)
+    lp = '([{'
+    rp = ')]}'
+    return lp.index(left) == rp.index(right)
+
+
+# print(par_checker('([{)]}'))  # False
+# print(par_checker('{[()]}'))  # True
+# print(par_checker('({([()])}){}'))  # True
