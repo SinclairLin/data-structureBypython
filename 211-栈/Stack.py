@@ -56,3 +56,31 @@ def turn_string(my_str: str):
 
 # print(turn_string('理塘丁真'))
 
+
+def par_checker(par):
+    s = Stack
+    flag = True
+    index = 0
+    while flag and index < len(par):
+        symbol = par[index]
+        if symbol in '([{':
+            s.push(symbol)
+        else:
+            if s.is_empty():
+                flag = False
+            else:
+                top = s.pop()
+                if not matches(top, symbol):
+                    flag = False
+        index += 1
+
+    if flag and s.is_empty():
+        return True
+    else:
+        return False
+
+
+def matches(left, right):
+    l = '([{'
+    r = ')]}'
+    return l.index(left) == r.index(right)
