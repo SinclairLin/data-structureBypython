@@ -25,6 +25,6 @@ class String:
 
 
 s = String()
-(s.load('niewenhao'))
-print(s.size())
-print(s.search(3, 9))
+s.load('niewenhao')
+print(s.size())  # 9
+print(s.search(3, 9))  # wenhao
